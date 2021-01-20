@@ -323,7 +323,9 @@ class Phonolammps(PhonoBase):
             cmd_list += ['-echo', 'none', '-screen', 'none']
 
         lmp = lammps.lammps(cmdargs=cmd_list)
-        lmp.commands_list(self._lammps_commands_list)
+        #lmp.commands_list(self._lammps_commands_list)
+        for l in self._lammps_commands_list:
+            lmp.command(l)
         lmp.command('replicate {} {} {}'.format(*supercell_sizes))
         lmp.command('run 0')
 

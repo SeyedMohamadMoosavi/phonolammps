@@ -91,9 +91,12 @@ def get_structure_from_lammps(command_list, show_log=False):
     if not show_log:
         cmd_list += ['-echo', 'none', '-screen', 'none']
 
-    lmp = lammps(cmdargs=cmd_list)
+    lmp = lammps()
+    for l in command_list:
+        lmp.command(l)
 
-    lmp.commands_list(command_list)
+
+    #lmp.commands_list(command_list)
     lmp.command('run 0')
 
     na = lmp.get_natoms()
